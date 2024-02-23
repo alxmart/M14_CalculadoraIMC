@@ -4,18 +4,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var btnCalcular: Button
-
-
+    lateinit var editPeso: EditText
+    lateinit var editAltura: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         btnCalcular = findViewById(R.id.btn_calcular)
+        editPeso = findViewById(R.id.edit_peso)
+        editAltura = findViewById(R.id.edit_altura)
 
         btnCalcular.setOnClickListener {
 
@@ -24,31 +27,16 @@ class MainActivity : AppCompatActivity() {
                 ResultadoActivity::class.java
             )
 
-            // Passar parâmetros para outra activity
-            /*
-             intent.putExtra("filme","The Witcher")
-             intent.putExtra("classificacao",5)
-             intent.putExtra("avaliacoes",9.2)
-             */
+            val peso = editPeso.text.toString()
+            val altura = editAltura.text.toString()
 
-           /* val filme = Filme(
-                "Sem limites",
-                "Teste",
-                4.8,
-                "Jamilton",
-                "Netflix"
-            )*/
+            if (peso.isNotEmpty() && altura.isNotEmpty()) {
 
-            //intent.putExtra("filme", filme)
+                intent.putExtra("peso", peso.toDouble())
+                intent.putExtra("altura", altura.toDouble())
 
-            startActivity( intent )
-
+                startActivity(intent)
+            }
         }
-
-
-
-
-
-
     }
 }
